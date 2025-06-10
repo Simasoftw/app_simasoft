@@ -6,6 +6,7 @@ class MyImages {
   static const String noInternet = "assets/animation/animation-no-wifi.json";
   static const String noDataImage = "assets/images/logo/app_icon.png";
   static const String noWifi = "assets/images/no-wifi-svgrepo-com.png";
+  static const String logoLogin = "assets/images/logoLogin.png";
 
   //Onboard Image
   static const List<String> onboardImages = [

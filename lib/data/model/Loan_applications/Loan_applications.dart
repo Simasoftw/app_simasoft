@@ -6,53 +6,55 @@ LoanApplications loanApplicationsFromJson(String str) => LoanApplications.fromJs
 
 String loanApplicationsToJson(LoanApplications data) => json.encode(data.toJson());
 
-class LoanApplications {
-    int clientId;
+class LoanApplications { 
+    int currentLoanAmount; 
+    String? status; 
+    int id;
     int companyId;
-    int amount;
-    String bankName;
-    String type;
-    User? user;
+    String? type;
+    int clientId;
 
-    LoanApplications({
-        required this.clientId,
-        required this.companyId,
-        required this.amount,
-        required this.bankName,
+    LoanApplications({ 
+        required this.id,
+        required this.currentLoanAmount, 
+        required this.companyId, 
         required this.type,
-        this.user,
+        required this.status, 
+        required this.clientId, 
     });
 
-    LoanApplications copyWith({
-        int? clientId,
-        int? companyId,
-        int? amount,
-        String? bankName,
+    LoanApplications copyWith({ 
+        int? id,
+        required int companyId,
+        int? currentLoanAmount,
+        String? status,
         String? type,
+        required int clientId,
+
     }) => 
         LoanApplications(
-            clientId: clientId ?? this.clientId,
-            companyId: companyId ?? this.companyId,
-            amount: amount ?? this.amount,
-            bankName: bankName ?? this.bankName,
+            id: id ?? this.id, 
+            companyId: companyId , 
+            currentLoanAmount: currentLoanAmount ?? this.currentLoanAmount, 
             type: type ?? this.type,
+            status: status ?? this.status,
+            clientId: clientId ,
         );
 
-    factory LoanApplications.fromJson(Map<String, dynamic> json) => LoanApplications(
-        clientId: json["clientId"],
-        companyId: json["companyId"],
-        amount: json["amount"],
-        bankName: json["bankName"],
-        type: json["type"],
-        user: json["user"] != null ? User.fromJson(json["user"]) : null,
+    factory LoanApplications.fromJson(Map<String, dynamic> json) => LoanApplications( 
+        id: json["id"], 
+        companyId: json["companyId"], 
+        currentLoanAmount: json["currentLoanAmount"] ?? json["amount"] , 
+        type: json["type"], 
+        status: json["status"], 
+        clientId: json["clientId"], 
     );
 
     Map<String, dynamic> toJson() => {
-        "clientId": clientId,
-        "companyId": companyId,
-        "amount": amount,
-        "bankName": bankName,
-        "type": type,
-        "user": user?.toJson(),
+        "id": id, 
+        "currentLoanAmount": currentLoanAmount, 
+        "type": type, 
+        "status": status,
+        "clientId": clientId
     };
 }

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/custom_no_data_found_class.dart';
+import '../../widgets/loading.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -65,10 +66,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 )
                 : Stack(
                     children: [
-                      Align(
-                          alignment: Alignment.center,
-                          child: Image.asset(MyImages.appLogoIcon,
-                              height: 100, width: 100)),
+                      CustomPreloader( ),
+                      // Align(
+                      //     alignment: Alignment.center,
+                      //     child: Image.asset(MyImages.appLogoIcon,
+                      //         height: 100, width: 100)),
                     ],
                   ),
           ),

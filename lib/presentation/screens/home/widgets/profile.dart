@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../../perfil/perfil_screen.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -9,17 +10,19 @@ class Profile extends StatelessWidget {
     return  Padding(
       padding: EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-
+        onTap: () { 
+          Get.to(() => PerfilScreen()); 
         },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(
-              8),
-          child: Image.asset(
-            'assets/images/avatar.png',
-            width: 40,
-            height: 40,
-            fit: BoxFit.cover,
+        child: Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(
+                50),
+            child: Image.asset(
+              'assets/images/avatar.png',
+              width: 115,
+              height: 115,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),

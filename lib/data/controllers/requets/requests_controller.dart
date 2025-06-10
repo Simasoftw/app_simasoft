@@ -15,11 +15,14 @@ class RequestController extends GetxController {
   TextEditingController bankNameController = TextEditingController();
 
   bool isSubmitLoading = false;
-  void requestLoan() async {
+  void requestLoan(int userId, int companyId, String typeRequest) async {
 
     ResponseModel model = await requetsRepo.payrollAdvance(
         amountController.text.toString(),
-        bankNameController.text.toString()
+        bankNameController.text.toString(),
+        userId,
+        companyId,
+        typeRequest
     );
 
     if (model.statusCode == 200 || model.statusCode == 201) {

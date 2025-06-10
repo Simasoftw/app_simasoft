@@ -17,7 +17,9 @@ class LoginRepo {
 
   Future<ResponseModel> loginUser(String email, String password) async {
     Map<String, String> map = {'email': email, 'password': password};
-    String url = 'http://192.168.1.17:3000/api/client/login-client';
+    // String url = 'http://192.168.1.17:3000/api/client/login-client';
+    String url = '${UrlContainer.baseUrl}${UrlContainer.loginClientEndPoint}';
+    // String url = 'https://lary-pay-backend.vercel.app/api/client/login-client';
 
     ResponseModel model =
         await apiClient.request(url, Method.postMethod, map, passHeader: false);

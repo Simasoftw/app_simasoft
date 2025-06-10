@@ -271,6 +271,13 @@ TextStyle lightSmall = TextStyle(
     fontSize: Dimensions.fontOverLarge
  );
 
+ TextStyle boldHomeOverLarge = TextStyle(
+    fontFamily: 'Inter',
+    color: MyColor.homeColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimensions.fontOverLarge
+ );
+
 TextStyle boldOverMega = TextStyle(
     fontFamily: 'Inter',
     color: MyColor.primaryTextColor,

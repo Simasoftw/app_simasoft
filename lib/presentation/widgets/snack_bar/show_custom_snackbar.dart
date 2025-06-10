@@ -113,40 +113,55 @@ class CustomSnackBar {
 
   }
 
-  static success(
-      {required String successList,
-      int duration = 2,
-      SnackPosition position = SnackPosition.TOP}) {
-    if (successList.isEmpty) {
-      successList = MyStrings.success.tr;
-    }
-    for (var i = 0; i < successList.length; i++) {
-      String message = successList[i].tr;
-      message = message.toString();
-      Future.delayed(
-        Duration(microseconds: 1000 * (i + 1)),
-        () {
-          Get.closeAllSnackbars();
-          Get.rawSnackbar(
-            progressIndicatorBackgroundColor: MyColor.transparentColor,
-            progressIndicatorValueColor:
-                const AlwaysStoppedAnimation<Color>(MyColor.transparentColor),
-            messageText: Container(
-              padding:  EdgeInsets.symmetric(
-                  horizontal: Dimensions.space5, vertical: Dimensions.space5),
+  static success({
+  required dynamic successList,
+  int duration = 2,
+  SnackPosition position = SnackPosition.TOP,
+}) {
+  // Convertir a lista si es String
+  List<String> messages = [];
+  if (successList is String) {
+    if (successList.trim().isEmpty) return;
+    messages = [successList];
+  } else if (successList is List<String>) {
+    if (successList.isEmpty) return;
+    messages = successList;
+  } else {
+    return; // No válido
+  }
+
+  for (var i = 0; i < messages.length; i++) {
+    String message = messages[i];
+
+    Future.delayed(
+      Duration(milliseconds: 300 * i),
+      () {
+        Get.closeAllSnackbars();
+        Get.rawSnackbar(
+          progressIndicatorBackgroundColor: MyColor.transparentColor,
+          progressIndicatorValueColor:
+              const AlwaysStoppedAnimation<Color>(MyColor.transparentColor),
+          messageText: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.space5,
+              vertical: Dimensions.space5,
+            ),
               child: Row(
                 children: [
                   Icon(Icons.check_circle, color: MyColor.colorGreen, size: 24)
                       .animate()
                       .rotate(
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeInOut),
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOut,
+                      ),
                   SizedBox(width: Dimensions.space10),
                   Expanded(
-                    child: Text(message.tr,
-                        style: regularLarge.copyWith(color: MyColor.colorGreen),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis),
+                    child: Text(
+                      message,
+                      style: regularLarge.copyWith(color: MyColor.colorGreen),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -155,9 +170,9 @@ class CustomSnackBar {
             snackPosition: position,
             backgroundColor: MyColor.colorWhite,
             borderRadius: 4,
-            margin:  EdgeInsets.all(Dimensions.space8),
-            padding:  EdgeInsets.all(Dimensions.space8),
-            duration: Duration(seconds: duration + (i + 1)),
+            margin: EdgeInsets.all(Dimensions.space8),
+            padding: EdgeInsets.all(Dimensions.space8),
+            duration: Duration(seconds: duration),
             isDismissible: true,
             forwardAnimationCurve: Curves.easeInOutCubicEmphasized,
             showProgressIndicator: false,
@@ -173,4 +188,5 @@ class CustomSnackBar {
       );
     }
   }
+
 }

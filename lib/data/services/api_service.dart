@@ -26,12 +26,13 @@ class ApiClient extends GetxService {
     http.Response response;
 
     try {
+     
       if (method == Method.postMethod) {
         if (passHeader) {
-          initToken();
+           initToken(); 
           Map<String, String> headers = {
-            "Accept": "application/json",
-            "Authorization": "$tokenType $token",
+            "Accept": "application/json, text/plain, */*", 
+            "Cookie": "access_token=$token",
           };
 
           if (isOnlyAcceptType) {
@@ -43,14 +44,15 @@ class ApiClient extends GetxService {
             body: params,
             headers: headers,
           );
-        } else {
+        } else { 
           response = await http.post(
             url,
-            body: params,
+            body: jsonEncode(params),
             headers: {
-              "dev-token":
-              "\$2y\$12\$mEVBW3QASB5HMBv8igls3ejh6zw2A0Xb480HWAmYq6BY9xEifyBjG",
-            },
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/plain, */*", 
+            "Cookie": "access_token=$token",
+          },
           );
         }
       }
@@ -65,7 +67,8 @@ class ApiClient extends GetxService {
             url,
             headers: {
               "Accept": "application/json",
-              "Authorization": "$tokenType $token",
+              // "Authorization": "$tokenType $token",
+              "Cookie": "access_token=$token",
             },
           );
         } else {
@@ -93,9 +96,10 @@ class ApiClient extends GetxService {
           response.body,
         );
       } else if (response.statusCode == 500) {
+        final body =  jsonDecode(response.body);
         return ResponseModel(
           false,
-          MyStrings.serverError.tr,
+          body['error'],
           500,
           response.body,
         );

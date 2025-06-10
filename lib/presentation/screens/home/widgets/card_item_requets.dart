@@ -29,17 +29,18 @@ class _CardRequestState extends State<CardRequest> {
         padding: EdgeInsets.all(Dimensions.space16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.cardMediumRadius),
-          color: MyColor.colorWhite
+          color: MyColor.secondaryColor
         ),
         child: Row(
           children: [
             Icon(
               widget.icon,
               size: Dimensions.space25,
+              color: MyColor.iconsColor,
             ),
             SizedBox(width: Dimensions.space10),
             Text(widget.text,
-              style: boldExtraLarge,
+              style: boldOverWhiteLarge,
             ),
           ],
         ),

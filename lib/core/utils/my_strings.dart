@@ -622,6 +622,8 @@ class MyStrings {
 
   static const String success = 'success';
 
+  static const String activeM = 'ACTIVE';
+
   static const String version = 'Version';
 
   static const String logoutSuccessMsg = 'Sign Out Successfully';

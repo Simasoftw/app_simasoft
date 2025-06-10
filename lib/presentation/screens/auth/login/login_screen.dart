@@ -3,6 +3,7 @@ import 'package:app_simasoft/core/utils/my_color.dart';
 import 'package:app_simasoft/core/utils/my_strings.dart';
 import 'package:app_simasoft/core/utils/style.dart';
 import 'package:app_simasoft/data/controllers/auth/login_controller.dart';
+import 'package:app_simasoft/data/controllers/user/user_controller.dart';
 import 'package:app_simasoft/data/repository/login_repo.dart';
 import 'package:app_simasoft/data/services/api_service.dart';
 import 'package:app_simasoft/presentation/screens/maintenance/maintanance_screen.dart';
@@ -14,6 +15,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:app_simasoft/core/utils/my_images.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,8 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LoginRepo(apiClient: Get.find()));
-    Get.put(LoginController(loginRepo: Get.find()));
-
+    Get.put(LoginController(loginRepo: Get.find())); 
     super.initState();
   }
 
@@ -49,13 +50,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 physics: const BouncingScrollPhysics(),
                 child: SafeArea(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-
+                    height: MediaQuery.of(context).size.height, 
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: Dimensions.space20),
+                       Image.asset(MyImages.logoLogin,
+                              height: 350, width: MediaQuery.of(context).size.width), 
                         Text(
                           'Inicia sesión',
                           style: GoogleFonts.poppins(
@@ -115,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                 },
                               ),
-                              SizedBox(height: Dimensions.space10),
+                              SizedBox(height: Dimensions.space16),
                               Align(
                                 alignment: Alignment.center,
                                 child: TextButton(

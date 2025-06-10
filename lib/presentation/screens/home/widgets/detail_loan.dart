@@ -17,6 +17,8 @@ class LoanSelectorWidget extends StatefulWidget {
   final String nameCustomer;
   final String typeRequest;
   final String title;
+  final int userId;
+  final int companyId;
 
   const LoanSelectorWidget({
     Key? key,
@@ -24,6 +26,8 @@ class LoanSelectorWidget extends StatefulWidget {
     required this.nameCustomer,
     required this.typeRequest,
     required this.title,
+    required this.userId,
+    required this.companyId
   }) : super(key: key);
 
   @override
@@ -69,42 +73,20 @@ class _LoanSelectorWidgetState extends State<LoanSelectorWidget> {
               children: [
                 Text(widget.title,
                   style: boldOverLarge
-                ),
-                SizedBox(height: Dimensions.space16),
-                Text(
-                  "Seleccionar el período de tiempo",
-                  style: TextStyle(fontSize: Dimensions.space16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: Dimensions.space8),
-                Wrap(
-                  spacing: 5.0,
-                  children: [
-                    _buildChip('Semanal', 0, 'SEMANAL'),
-                    _buildChip('Quincenal', 1, 'QUINCENAL'),
-                    _buildChip('Mensual', 2, 'MENSUAL'),
-                  ],
-                ),
-                SizedBox(height: Dimensions.space16),
+                ),  
+                SizedBox(height: Dimensions.space10),
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   height: 100,
                   child: TextFormField(
                     controller: controller.amountController,
-                    inputFormatters: [ TextInputMask(mask: '9,999,999,999,999.99', placeholder: '0', maxPlaceHolders: 3, reverse: true)],
+                    inputFormatters: [ TextInputMask(mask: '9,999,999,999,999', placeholder: '0', reverse: true)],
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     autofocus: false,
-                    style: TextStyle(
-                      fontSize: valueLoan.text.isEmpty
-                          ? 60.0
-                          : 60.0 -
-                          (valueLoan.text.length *
-                              2), // Ajuste del tamaño del texto basado en la longitud del texto
-                      color: Color(0xFF22014D),
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: boldOverMega,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: "0.00",
+                      hintText: "0",
                       hintStyle: TextStyle(
                         fontSize: 64.0,
                         color: Color(0xFF22014D),
@@ -119,7 +101,7 @@ class _LoanSelectorWidgetState extends State<LoanSelectorWidget> {
                   isLoading: controller.isSubmitLoading,
                   text: 'Solicitar adelanto',
                   press: () {
-                    controller.requestLoan();
+                    controller.requestLoan(widget.userId, widget.companyId, widget.typeRequest);
                   },
                 ),
               ],

@@ -9,12 +9,16 @@ class RequetsRepo {
 
   RequetsRepo({required this.apiClient});
 
-  Future<ResponseModel> payrollAdvance(String amount, String bankName) async {
-    Map<String, String> map = {
+  Future<ResponseModel> payrollAdvance(String amount, String bankName, int userId, int companyId, String typeRequest) async {
+
+    double parsedAmount = double.parse(amount.replaceAll(",", ""));
+
+    Map<String, dynamic> map = {
       'bankName': "NEQUI",
-      'amount': amount,
-      "id": "3",
-      "companyId": "1"
+      'amount': parsedAmount, 
+      'type': typeRequest,
+      "companyId": companyId,
+      "clientId": userId
     };
 
     String url = '${UrlContainer.baseUrl}${UrlContainer.loanApplications}';
