@@ -43,6 +43,8 @@ class ApiClient extends GetxService {
             body: params,
             headers: headers,
           );
+
+          print("response service ${response.statusCode}");
         } else {
           response = await http.post(
             url,
@@ -52,6 +54,7 @@ class ApiClient extends GetxService {
               "\$2y\$12\$mEVBW3QASB5HMBv8igls3ejh6zw2A0Xb480HWAmYq6BY9xEifyBjG",
             },
           );
+          print("response service ${response.statusCode}");
         }
       }
       else if (method == Method.deleteMethod) {
@@ -77,12 +80,13 @@ class ApiClient extends GetxService {
           );
         }
       }
-
+      print("response service ${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201 ) {
-        print("response");
+
+        final decodedResponse = jsonDecode(response.body);
 
 
-        return ResponseModel(true, 'Success', 200, response.body);
+        return ResponseModel(true, decodedResponse["message"], 200, response.body);
       } else if (response.statusCode == 401) {
         sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
         Get.offAllNamed(RouteHelper.loginScreen);
@@ -112,6 +116,7 @@ class ApiClient extends GetxService {
     } on FormatException {
       return ResponseModel(false, MyStrings.badResponseMsg.tr, 400, '');
     } catch (e) {
+      print("errrror ${e}");
       return ResponseModel(false, MyStrings.somethingWentWrong.tr, 499, '');
     }
   }

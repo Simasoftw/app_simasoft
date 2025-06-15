@@ -24,15 +24,22 @@ class SplashController extends GetxController {
   void getGSData() async {
     isLoading = true;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey) ?? "";
+    String? token = sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
 
-    ResponseModel response = await repo.validateSession(token);
+
+    if (token == null || token.isEmpty){
+      isLoading = false;
+      update();
+      Future.delayed(const Duration(seconds: 1), () {
+        Get.offAndToNamed(RouteHelper.loginScreen);
+      });
+
+    }
+
+    ResponseModel response = await repo.validateSession(token!);
 
 
     if (response.statusCode == 200) {
-      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(
-          jsonDecode(response.responseJson)
-      );
 
       isLoading = false;
       update();
@@ -49,8 +56,8 @@ class SplashController extends GetxController {
     }
     if (response.statusCode == 503) {
       noInternet = true;
+      CustomSnackBar.error(errorList: response.message);
       update();
     }
-    CustomSnackBar.error(errorList: response.message);
   }
 }

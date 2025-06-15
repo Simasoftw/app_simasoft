@@ -111,7 +111,9 @@ class _LoanSelectorWidgetState extends State<LoanSelectorWidget> {
                       ),
                     ),
                     textAlign: TextAlign.center,
-                    onChanged: (text) => setState(() {}),
+                    onChanged: (text) => setState(() {
+
+                    }),
                   ),
                 ),
 

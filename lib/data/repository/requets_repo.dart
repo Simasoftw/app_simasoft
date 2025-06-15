@@ -9,19 +9,32 @@ class RequetsRepo {
 
   RequetsRepo({required this.apiClient});
 
-  Future<ResponseModel> payrollAdvance(String amount, String bankName) async {
-    Map<String, String> map = {
-      'bankName': "NEQUI",
-      'amount': amount,
-      "id": "3",
-      "companyId": "1"
+  Future payrollAdvance(double amount, String bankName) async {
+
+    Map<String, dynamic> map = {
+      'bankName': bankName,
+      'amount': amount.toString(),
+      'companyId': "1",
+      'requestType': "PAYROLL_ADVANCE",
+      'clientId' : "3"
     };
 
-    String url = '${UrlContainer.baseUrl}${UrlContainer.loanApplications}';
+    String url =  "http://192.168.1.17:3000/api/loanApplications/create"; //'${UrlContainer.baseUrl}${UrlContainer.loanApplications}';
 
-    ResponseModel model =
-        await apiClient.request(url, Method.postMethod, map, passHeader: false);
-    return model;
+    try {
+      ResponseModel model =
+      await apiClient.request(url, Method.postMethod, map, passHeader: false);
+
+      return model;
+    } catch (e) {
+      ResponseModel responseModel = ResponseModel(
+        false,
+        "Error en la petición",
+        500,
+        '{"data":"ok"}',
+      );
+      return responseModel;
+    }
   }
 
 

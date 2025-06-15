@@ -9,24 +9,22 @@ String loanApplicationsToJson(LoanApplications data) => json.encode(data.toJson(
 class LoanApplications {
     int clientId;
     int companyId;
-    int amount;
+    double? amount;
     String bankName;
-    String type;
-    User? user;
+    String requestType;
 
     LoanApplications({
         required this.clientId,
         required this.companyId,
-        required this.amount,
+        this.amount,
         required this.bankName,
-        required this.type,
-        this.user,
+        required this.requestType,
     });
 
     LoanApplications copyWith({
         int? clientId,
         int? companyId,
-        int? amount,
+        double? amount,
         String? bankName,
         String? type,
     }) => 
@@ -35,24 +33,27 @@ class LoanApplications {
             companyId: companyId ?? this.companyId,
             amount: amount ?? this.amount,
             bankName: bankName ?? this.bankName,
-            type: type ?? this.type,
+            requestType: requestType ?? this.requestType,
         );
 
     factory LoanApplications.fromJson(Map<String, dynamic> json) => LoanApplications(
         clientId: json["clientId"],
         companyId: json["companyId"],
-        amount: json["amount"],
+        amount: json["amount"] != null
+            ? (json["amount"] is String
+            ? double.tryParse(json["amount"]) ?? 0
+            : json["amount"].toDouble())
+            : 0,
         bankName: json["bankName"],
-        type: json["type"],
-        user: json["user"] != null ? User.fromJson(json["user"]) : null,
+        requestType: json["requestType"],
     );
+
 
     Map<String, dynamic> toJson() => {
         "clientId": clientId,
         "companyId": companyId,
         "amount": amount,
         "bankName": bankName,
-        "type": type,
-        "user": user?.toJson(),
+        "requestType": requestType,
     };
 }
