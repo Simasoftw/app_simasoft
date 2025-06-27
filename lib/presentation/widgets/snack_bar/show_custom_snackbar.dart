@@ -12,9 +12,9 @@ class CustomSnackBar {
       {required String errorList,
       int duration = 5,
       SnackPosition position = SnackPosition.TOP}) {
-    if (errorList.isEmpty) {
-      errorList = MyStrings.somethingWentWrong;
-    }
+      if (errorList.isEmpty) {
+        errorList = MyStrings.somethingWentWrong;
+      }
 
 
       String message = errorList;

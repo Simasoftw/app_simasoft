@@ -1,6 +1,8 @@
 import 'package:app_simasoft/data/controllers/loan/loan_controller.dart';
+import 'package:app_simasoft/data/controllers/requets/requests_controller.dart';
 import 'package:app_simasoft/data/controllers/user/user_controller.dart';
 import 'package:app_simasoft/data/repository/loan_repo.dart';
+import 'package:app_simasoft/data/repository/requets_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,8 +19,10 @@ Future<void> main() async {
   MyUtils.allScreen();
   MyUtils().stopLandscape();
   Get.put(LoanRepo(apiClient: Get.find()));
+  Get.put(RequetsRepo(apiClient: Get.find()));
 
   Get.put(LoanController(loanRepo: Get.find()));
+  Get.put(RequestController(requetsRepo: Get.find()));
   Get.put<UserController>(UserController(), permanent: true); 
   runApp(MyApp());
 }

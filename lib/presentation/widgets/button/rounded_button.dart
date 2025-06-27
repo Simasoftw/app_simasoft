@@ -33,8 +33,8 @@ class RoundedButton extends StatelessWidget {
     this.isOutlined = false,
     this.horizontalPadding = 15,
     this.verticalPadding = 4,
-    this.color = MyColor.primaryColor,
-    this.textColor = MyColor.colorWhite,
+    this.color = MyColor.colorWhite,
+    this.textColor = MyColor.primaryColor ,
     this.textStyle,
     this.isLoading = false,
     this.borderColor = MyColor.primaryColor, // Default border color
@@ -50,7 +50,7 @@ class RoundedButton extends StatelessWidget {
               regularDefault.copyWith(
                   color: isColorChange
                       ? textColor
-                      : MyColor.getPrimaryButtonTextColor(),
+                      : MyColor.getPrimaryButtonColor(),
                   fontSize: 14,
                   fontWeight: FontWeight.bold),
         );
@@ -74,7 +74,7 @@ class RoundedButton extends StatelessWidget {
               ).copyWith(
                 overlayColor: WidgetStateProperty.resolveWith((states) {
                   if (states.contains(WidgetState.pressed)) {
-                    return MyColor.borderColor.withValues(
+                    return MyColor.primaryButtonColor.withValues(
                         alpha:
                             0.2); // Set the splash color to red with 40% opacity
                   }
@@ -100,7 +100,7 @@ class RoundedButton extends StatelessWidget {
               ),
               child: isLoading
                   ? const SpinKitThreeBounce(
-                      color: MyColor.colorWhite, size: 20)
+                      color: MyColor.primaryButtonColor, size: 20)
                   : buttonChild,
             ),
     );

@@ -19,6 +19,7 @@ class LoanSelectorWidget extends StatefulWidget {
   final String title;
   final int userId;
   final int companyId;
+  final String titleButton;
 
   const LoanSelectorWidget({
     Key? key,
@@ -27,7 +28,8 @@ class LoanSelectorWidget extends StatefulWidget {
     required this.typeRequest,
     required this.title,
     required this.userId,
-    required this.companyId
+    required this.companyId,
+    required this.titleButton,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,9 @@ class _LoanSelectorWidgetState extends State<LoanSelectorWidget> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(RequetsRepo(apiClient: Get.find()));
     Get.put(RequestController(requetsRepo: Get.find()));
+    
+    final controller = Get.put(RequestController(requetsRepo: Get.find())); 
+    controller.amountController.text = "0";
 
     super.initState();
   }
@@ -99,9 +104,9 @@ class _LoanSelectorWidgetState extends State<LoanSelectorWidget> {
 
                 RoundedButton(
                   isLoading: controller.isSubmitLoading,
-                  text: 'Solicitar adelanto',
+                  text: widget.titleButton,
                   press: () {
-                    controller.requestLoan(widget.userId, widget.companyId, widget.typeRequest);
+                    controller.requestLoan(widget.userId, widget.companyId, widget.typeRequest, context);
                   },
                 ),
               ],

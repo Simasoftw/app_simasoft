@@ -305,7 +305,7 @@ class MyStrings {
 
   static const String forgotPassword = "Forgot Password?";
 
-  static const String signIn = "Sign In";
+  static const String signIn = "Entrar";
 
   static const String firstName = "First Name";
 
@@ -449,9 +449,9 @@ class MyStrings {
 
   static const String recoverAccount = "Recover Account";
 
-  static const String usernameOrEmail = "Username or Email";
+  static const String usernameOrEmail = "Cedula";
 
-  static const String usernameOrEmailHint = "Enter your username or email";
+  static const String usernameOrEmailHint = "Enter your Cedula or email";
 
   static const String createAccount = "Create an account";
 

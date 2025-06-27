@@ -63,6 +63,8 @@ class ApiClient extends GetxService {
       } else {
         if (passHeader) {
           initToken();
+          print("token");
+          print(token);
           response = await http.get(
             url,
             headers: {

@@ -19,11 +19,12 @@ class LoanController extends GetxController {
   }
  
   LoanApplications? get currentLoan => loan.value;
+  // List<LoanApplications>? get arrayCurrentLoan => loan.value;
 
   Future loanFilterByClient() async { 
     update();
 
-    ResponseModel model = await loanRepo.loanFilterByClient();
+    ResponseModel model = await loanRepo.loanFilter();
 
     if (model.statusCode == 200 || model.statusCode == 201) {
       List<dynamic> loans = jsonDecode(model.responseJson); 

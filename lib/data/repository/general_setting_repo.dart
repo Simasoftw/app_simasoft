@@ -15,7 +15,6 @@ class GeneralSettingRepo {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     String? token = sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
-    print("token ${token}");
 
     if (token == null || token.isEmpty) {
       return ResponseModel(
@@ -28,7 +27,6 @@ class GeneralSettingRepo {
 
     String url = '${UrlContainer.baseUrl}${UrlContainer.validateToken}';
     ResponseModel response = await apiClient.request(url, Method.postMethod, {"token": token}, passHeader: false);
-    print("object ${response}");
     return response;
   }
 

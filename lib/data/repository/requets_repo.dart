@@ -28,5 +28,17 @@ class RequetsRepo {
     return model;
   }
 
+  Future<ResponseModel> getRequets(int userId) async { 
+    Map<String, dynamic> map = { 
+      "clientId": userId
+    };
+
+    String url = '${UrlContainer.baseUrl}${UrlContainer.loanFilter}';
+
+    ResponseModel model =
+        await apiClient.request(url, Method.postMethod, map, passHeader: false);
+    return model;
+  }
+
 
 }

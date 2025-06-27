@@ -11,7 +11,7 @@ class LoanRepo {
 
   LoanRepo({required this.apiClient});
 
- Future<ResponseModel> loanFilterByClient() async {
+ Future<ResponseModel> loanFilter() async {
  
     String url = '${UrlContainer.baseUrl}${UrlContainer.loanFilterEndPoint}'; 
 

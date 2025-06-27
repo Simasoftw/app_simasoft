@@ -50,7 +50,6 @@ class SplashController extends GetxController {
     if (response.statusCode == 503) {
       noInternet = true;
       update();
-    }
-    CustomSnackBar.error(errorList: response.message);
+    } 
   }
 }

@@ -1,10 +1,12 @@
+import 'package:app_simasoft/data/model/User/user.model.dart';
 import 'package:app_simasoft/data/repository/login_repo.dart';
-import 'package:app_simasoft/data/services/api_service.dart';
+import 'package:app_simasoft/data/services/api_service.dart'; 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:app_simasoft/data/controllers/auth/login_controller.dart';
 import 'package:app_simasoft/core/utils/my_color.dart';
+import 'package:app_simasoft/data/controllers/user/user_controller.dart';
 
 class PerfilScreen extends StatefulWidget {
   const PerfilScreen({super.key});
@@ -14,13 +16,28 @@ class PerfilScreen extends StatefulWidget {
 }
 
 class _PerfilScreenState extends State<PerfilScreen> {
+
+  late UserController userController;
+  User? user;
+
+
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LoginRepo(apiClient: Get.find()));
     Get.put(LoginController(loginRepo: Get.find()));
+    userController = Get.find<UserController>();
 
     super.initState();
+    loadUser();
+  }
+
+
+ Future<void> loadUser() async {
+    final result = await userController.getUser();
+    setState(() {
+      user = result;
+    });
   }
 
   Widget build(BuildContext context) {
@@ -65,8 +82,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                Text(
-                                  controller.nombreUsuario,
+                                Text(user?.fullName ?? "",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -75,11 +91,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                 ),
                                 const SizedBox(height: 8),
                                 const Text(
-                                  '# de tu Celular',
+                                  'Email',
                                   style: TextStyle(color: Colors.white70),
                                 ),
                                 Text(
-                                  controller.celular,
+                                  user?.email ?? "Correo@gmail.com",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -88,13 +104,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          _opcionTile(Iconsax.setting_2, 'Ajustes'),
-                          _opcionTile(
-                            Iconsax.document,
-                            'Documentos y certificados',
-                          ),
-                          _opcionTile(Iconsax.info_circle, 'Ayuda'),
+                          const SizedBox(height: 30), 
+                          // _opcionTile(
+                          //   Iconsax.document,
+                          //   'Historico Solicitudes',
+                          // ), 
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -133,18 +147,19 @@ class _PerfilScreenState extends State<PerfilScreen> {
     );
   }
 
-  Widget _opcionTile(IconData icon, String title) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.white),
-      title: Text(title, style: const TextStyle(color: Colors.white)),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        color: Colors.white,
-        size: 16,
-      ),
-      onTap: () {
-        // Acción pendiente
-      },
-    );
-  }
+  // Widget _opcionTile(IconData icon, String title) {
+  //   return ListTile(
+  //     leading: Icon(icon, color: Colors.white),
+  //     title: Text(title, style: const TextStyle(color: Colors.white)),
+  //     trailing: const Icon(
+  //       Icons.arrow_forward_ios,
+  //       color: Colors.white,
+  //       size: 16,
+  //     ),
+  //     onTap: () {
+  //         Get.to(() => SolicitudHistoryScreen()); 
+  //       // Acción pendiente
+  //     },
+  //   );
+  // }
 }

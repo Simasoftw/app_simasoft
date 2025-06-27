@@ -12,6 +12,7 @@ class UrlContainer {
   static const String loanApplications = 'loanApplications/create';
 
   static const String loanFilterEndPoint = 'loanApplications/getByClient';
+  static const String loanFilter = 'loanApplications/filter';
 
 
 }

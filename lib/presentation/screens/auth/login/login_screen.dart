@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return WillPopWidget(
       nextRoute: '',
       child: Scaffold(
-        backgroundColor: MyColor.colorWhite,
+        backgroundColor: MyColor.primaryColor,
         body: GetBuilder<LoginController>(
           builder:
               (controller) => SingleChildScrollView(
@@ -61,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Inicia sesión',
                           style: GoogleFonts.poppins(
                             fontSize: 28,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                   child: Text(
                                     '¿Olvidaste tu contraseña?',
-                                    style: boldMediumLarge,
+                                    style: boldMediumLargeWhite,
                                   ),
                                 ),
                               ),

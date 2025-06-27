@@ -10,9 +10,9 @@ class LoanApplications {
     int currentLoanAmount; 
     String? status; 
     int id;
-    int companyId;
+    int? companyId;
     String? type;
-    int clientId;
+    int? clientId;
 
     LoanApplications({ 
         required this.id,
@@ -25,11 +25,11 @@ class LoanApplications {
 
     LoanApplications copyWith({ 
         int? id,
-        required int companyId,
+        int? companyId,
         int? currentLoanAmount,
         String? status,
         String? type,
-        required int clientId,
+        int? clientId,
 
     }) => 
         LoanApplications(
@@ -38,7 +38,7 @@ class LoanApplications {
             currentLoanAmount: currentLoanAmount ?? this.currentLoanAmount, 
             type: type ?? this.type,
             status: status ?? this.status,
-            clientId: clientId ,
+            clientId: clientId ?? this.clientId,
         );
 
     factory LoanApplications.fromJson(Map<String, dynamic> json) => LoanApplications( 

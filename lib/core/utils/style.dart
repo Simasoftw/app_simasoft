@@ -43,6 +43,12 @@ TextStyle lightSmall = TextStyle(
     fontWeight: FontWeight.w300,
     fontSize: Dimensions.fontLarge);
 
+TextStyle lightMediumLargeWhite = TextStyle(
+    fontFamily: 'Inter',
+    color: MyColor.colorWhite,
+    fontWeight: FontWeight.w300,
+    fontSize: Dimensions.fontLarge);
+
  TextStyle lightExtraLarge = TextStyle(
     fontFamily: 'Inter',
     color: MyColor.primaryTextColor,
@@ -93,7 +99,7 @@ TextStyle lightSmall = TextStyle(
     fontFamily: 'Inter',
     color: MyColor.primaryTextColor,
     fontWeight: FontWeight.w400,
-    fontSize: Dimensions.fontLarge
+    fontSize: Dimensions.space20
  );
 
  TextStyle regularMediumLarge = TextStyle(
@@ -253,6 +259,13 @@ TextStyle lightSmall = TextStyle(
  TextStyle boldMediumLarge = TextStyle(
     fontFamily: 'Inter',
     color: MyColor.primaryTextColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimensions.fontLarge
+ );
+
+  TextStyle boldMediumLargeWhite = TextStyle(
+    fontFamily: 'Inter',
+    color: MyColor.colorWhite,
     fontWeight: FontWeight.w700,
     fontSize: Dimensions.fontLarge
  );

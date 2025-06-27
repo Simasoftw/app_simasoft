@@ -60,7 +60,7 @@ class CustomTextField extends StatefulWidget {
       this.labelText,
       this.labelTextStyle,
       this.readOnly = false,
-      this.fillColor = MyColor.transparentColor,
+      this.fillColor = MyColor.colorWhite,
       this.focusColor,
       required this.onChanged,
       this.hintText,

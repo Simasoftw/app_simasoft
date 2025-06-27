@@ -7,6 +7,7 @@ class MyImages {
   static const String noDataImage = "assets/images/logo/app_icon.png";
   static const String noWifi = "assets/images/no-wifi-svgrepo-com.png";
   static const String logoLogin = "assets/images/logoLogin.png";
+  static const String logoLoading = "assets/images/logoLoading.png";
 
   //Onboard Image
   static const List<String> onboardImages = [

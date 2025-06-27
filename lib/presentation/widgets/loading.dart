@@ -77,7 +77,7 @@ class _CustomPreloaderState extends State<CustomPreloader> with TickerProviderSt
                 child: ScaleTransition(
                   scale: _pulseAnimation,
                   child: ClipOval(
-                    child: Image.asset(MyImages.appLogoIcon,
+                    child: Image.asset(MyImages.logoLoading,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -86,7 +86,7 @@ class _CustomPreloaderState extends State<CustomPreloader> with TickerProviderSt
             ),
             const SizedBox(height: 25),
             Text(
-              'Cargando${'.' * _dotsCount}',
+              'Nubo${'.' * _dotsCount}',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ],

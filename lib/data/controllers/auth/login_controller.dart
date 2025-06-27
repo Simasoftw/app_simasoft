@@ -57,6 +57,8 @@ class LoginController extends GetxController {
         String accessToken = loginModel.data?.accessToken ?? "";
         String tokenType = loginModel.data?.tokenType ?? "";
         User? user = loginModel.data?.user;
+            print("accessToken");
+            print(accessToken);
 
         // ⬇️ Aquí guardas el usuario en el controlador global
         if (user != null) {  
