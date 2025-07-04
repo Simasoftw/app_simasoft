@@ -1,6 +1,7 @@
 import 'package:app_simasoft/data/controllers/loan/loan_controller.dart';
 import 'package:app_simasoft/data/controllers/user/user_controller.dart';
 import 'package:app_simasoft/data/repository/loan_repo.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'core/di_service/di_services.dart' as di_service;
 import 'core/route/route.dart';
 import 'core/theme/light/light.dart';
 import 'core/utils/util.dart';
+import 'data/services/firebase-notification.service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,8 @@ Future<void> main() async {
   MyUtils.allScreen();
   MyUtils().stopLandscape();
   Get.put(LoanRepo(apiClient: Get.find()));
+  await Firebase.initializeApp();
+  await FirebaseApiNotification().initNotifications();
 
   Get.put(LoanController(loanRepo: Get.find()));
   Get.put<UserController>(UserController(), permanent: true); 
