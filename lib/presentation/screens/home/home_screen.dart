@@ -91,18 +91,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final result = await userController.getUser();
     setState(() {
       user = result;
+      print("resultado ${jsonEncode(result)}");
     });
   }
 
   Future<void> loadRequets(int id) async {
-    final result = await requetsController.requetsRepo.getRequets(id); 
-    final responseJson = jsonDecode(result.responseJson); 
+    final result = await requetsController.requetsRepo.getRequets(id);
+    final responseJson = jsonDecode(result.responseJson);
     setState(() {
-      requets = (responseJson as List)
-      .map((item) => Requets.fromJson(item))
-      .toList();
-    });  
-
+      requets =
+          (responseJson as List).map((item) => Requets.fromJson(item)).toList();
+    });
   }
 
   @override
@@ -116,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool showExtension = true;
     if (user == null || loan == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -233,8 +233,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Iconsax.gift_copy,
                           text: "Bono de cumpleaños",
                           callback: () => (),
+                          typeLoan: "Bono de cumpleaños",
                         ),
 
+                        SizedBox(height: Dimensions.space16),
                         // 🟨 Aquí agregamos espacio flexible si hay poco contenido
                         Expanded(child: Container()),
 
