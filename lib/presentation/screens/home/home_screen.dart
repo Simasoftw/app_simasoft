@@ -98,14 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> loadRequets(int id) async {
-    final result = await requetsController.requetsRepo.getRequets(id); 
-    final responseJson = jsonDecode(result.responseJson); 
+    final result = await requetsController.requetsRepo.getRequets(id);
+    final responseJson = jsonDecode(result.responseJson);
     setState(() {
-      requets = (responseJson as List)
-      .map((item) => Requets.fromJson(item))
-      .toList();
-    });  
-
+      requets =
+          (responseJson as List).map((item) => Requets.fromJson(item)).toList();
+    });
   }
 
   @override
@@ -236,8 +234,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Iconsax.gift_copy,
                           text: "Bono de cumpleaños",
                           callback: () => (),
+                          typeLoan: "Bono de cumpleaños",
                         ),
 
+                        SizedBox(height: Dimensions.space16),
                         // 🟨 Aquí agregamos espacio flexible si hay poco contenido
                         Expanded(child: Container()),
 
