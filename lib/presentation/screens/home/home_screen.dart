@@ -91,7 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final result = await userController.getUser();
     setState(() {
       user = result;
-      print("resultado ${jsonEncode(result)}");
     });
   }
 
@@ -115,7 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool showExtension = true;
     if (user == null || loan == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
