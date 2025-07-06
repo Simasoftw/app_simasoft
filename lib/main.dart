@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Nubo',
           theme: lightThemeData,
           initialRoute: RouteHelper.splashScreen,
           getPages: RouteHelper().routes,

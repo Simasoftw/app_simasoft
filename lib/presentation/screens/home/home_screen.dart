@@ -83,8 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final loanController = Get.find<LoanController>();
     await loanController.loanFilterByClient();
     loan = loanController.currentLoan;
-    loadRequets(loan!.clientId ?? 0);
-    setState(() {});
+    if(loan?.clientId != null){
+      loadRequets(loan!.clientId ?? 0);
+      setState(() {});
+    }
+   
   }
 
   Future<void> loadUser() async {
