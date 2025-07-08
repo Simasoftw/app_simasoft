@@ -11,14 +11,18 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   final int id;
   final String? name;
-  final String fullName;
-  final String email;
+  final String  fullName;
+  final String  email;
+  final String? birthdayBonus;
+  final String? birthDate;
 
   User({
     required this.id,
     required this.email,
     required this.name,
     required this.fullName,
+    required this.birthdayBonus,
+    required this.birthDate,
   });
 
   User copyWith({
@@ -26,12 +30,16 @@ class User {
     String? email,
     String? name,
     String? fullName,
+    String? birthdayBonus,
+    String? birthDate,
   }) =>
       User(
         id: id ,
         email: email ?? this.email,
         name: name ?? this.name,
         fullName: fullName ?? this.fullName,
+        birthdayBonus: birthdayBonus ?? this.birthdayBonus,
+        birthDate: birthDate ?? this.birthDate,
       );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -39,6 +47,8 @@ class User {
     email: json["email"] ?? "",
     name: json["name"] ?? "",
     fullName: json["fullName"] ?? "",
+    birthdayBonus: json["birthdayBonus"] ?? "",
+    birthDate: json["birthDate"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -46,5 +56,7 @@ class User {
     "email": email,
     "name": name,
     "fullName": fullName,
+    "birthdayBonus": birthdayBonus,
+    "birthDate": birthDate,
   };
 }

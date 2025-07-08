@@ -10,6 +10,7 @@ class UrlContainer {
   static const String resetPasswordEndPoint = '$domainUrl/api/auth/longin';
   static const String validateToken = 'client/validate-token';
   static const String loanApplications = 'loanApplications/create';
+  static const String updateLoanApplications = 'loanApplications/';
 
   static const String loanFilterEndPoint = 'loanApplications/getByClient';
   static const String loanFilter = 'loanApplications/filter';

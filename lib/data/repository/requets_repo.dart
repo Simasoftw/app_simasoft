@@ -40,5 +40,16 @@ class RequetsRepo {
     return model;
   }
 
+  Future<ResponseModel> update(String status, int id) async { 
 
+    Map<String, dynamic> map = {
+      'status': status, 
+    };
+
+    String url = '${UrlContainer.baseUrl}${UrlContainer.updateLoanApplications}$id';
+
+    ResponseModel model =
+        await apiClient.request(url, Method.putMethod, map, passHeader: false);
+    return model;
+  }
 }

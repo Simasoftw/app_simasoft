@@ -29,7 +29,7 @@ class ApiClient extends GetxService {
      
       if (method == Method.postMethod) {
         if (passHeader) {
-           initToken(); 
+          initToken(); 
           Map<String, String> headers = {
             "Accept": "application/json, text/plain, */*", 
             "Cookie": "access_token=$token",
@@ -60,6 +60,22 @@ class ApiClient extends GetxService {
         response = await http.delete(url);
       } else if (method == Method.updateMethod) {
         response = await http.patch(url);
+      } else if (method == Method.putMethod) {
+         initToken(); 
+          Map<String, String> headers = {
+            "Accept": "application/json, text/plain, */*", 
+            "Cookie": "access_token=$token",
+          };
+
+          if (isOnlyAcceptType) {
+            headers.remove("Authorization");
+          }
+
+          response = await http.put(
+            url,
+            body: params,
+            headers: headers,
+          );
       } else {
         if (passHeader) {
           initToken();

@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   User? user;
   LoanApplications? loan;
   List<Requets>? requets;
+  var estadoCumpleano;
   final formatter = NumberFormat("#,##0", "en_US");
 
   Future<void> loadRequest(
@@ -83,15 +84,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final loanController = Get.find<LoanController>();
     await loanController.loanFilterByClient();
     loan = loanController.currentLoan;
-    if(loan?.clientId != null){
+    if (loan?.clientId != null) {
       loadRequets(loan!.clientId ?? 0);
       setState(() {});
     }
-   
   }
 
   Future<void> loadUser() async {
     final result = await userController.getUser();
+    final controller = Get.put(RequestController(requetsRepo: Get.find()));
+    controller.amountController.text = result?.birthdayBonus ?? "0";
+    controller.bankNameController.text = "NEQUI";
     setState(() {
       user = result;
     });
@@ -105,6 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
           (responseJson as List).map((item) => Requets.fromJson(item)).toList();
     });
   }
+
+  
 
   @override
   void initState() {
@@ -230,11 +235,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                         ),
                         SizedBox(height: Dimensions.space16),
-                        CardRequest(
-                          icon: Iconsax.gift_copy,
-                          text: "Bono de cumpleaños",
-                          callback: () => (),
-                          typeLoan: "Bono de cumpleaños",
+                        GetBuilder<RequestController>(
+                          builder:
+                              (controller) => CardRequest(
+                                icon: Iconsax.gift_copy,
+                                text: "Bono de cumpleaños",
+                                callback:
+                                    () => (controller.requestLoan(
+                                      loan!.clientId ?? 0,
+                                      loan!.companyId ?? 0,
+                                      "BIRTHDAY_BONUS",
+                                      context,
+                                    )),
+                                typeLoan: "Bono de cumpleaños",
+                                birthdayBonus: user?.birthdayBonus,
+                                birthDate: user?.birthDate
+                              ),
                         ),
 
                         SizedBox(height: Dimensions.space16),
