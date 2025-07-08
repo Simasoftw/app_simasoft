@@ -38,11 +38,16 @@ class LoginController extends GetxController {
   bool isSubmitLoading = false;
   void loginUser() async {
     isSubmitLoading = true;
+    final prefs = await SharedPreferences.getInstance();
     update();
+
+    final token = prefs.getString('tokenDevice') ?? "";
+
 
     ResponseModel model = await loginRepo.loginUser(
       emailController.text.toString(),
       passwordController.text.toString(),
+      token
     );
 
     if (model.statusCode == 200 || model.statusCode == 201) {
@@ -58,9 +63,8 @@ class LoginController extends GetxController {
         String tokenType = loginModel.data?.tokenType ?? "";
         User? user = loginModel.data?.user;
 
-        // ⬇️ Aquí guardas el usuario en el controlador global
-        if (user != null) {  
-          final prefs = await SharedPreferences.getInstance();
+        if (user != null) {
+
            String jsonUser = jsonEncode(user.toJson());
           await prefs.setString('user', jsonUser);
           userController.setUser(user);
