@@ -16,7 +16,7 @@ class LoginRepo {
   LoginRepo({required this.apiClient});
 
   Future<ResponseModel> loginUser(String email, String password, String tokenDevice) async {
-    Map<String, String> map = {'email': email, 'password': password, 'tokenDevice': tokenDevice};
+    Map<String, String> map = {'identification': email, 'password': password, 'tokenDevice': tokenDevice};
     String url = '${UrlContainer.baseUrl}${UrlContainer.loginClientEndPoint}';
 
     ResponseModel model =
